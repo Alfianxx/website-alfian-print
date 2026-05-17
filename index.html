@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfian Print – Fotokopi, Print & ATK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111110;
+      --white: #fafaf8;
+      --off:   #f0efe9;
+      --mid:   #e0dfd8;
+      --muted: #888880;
+      --shadow: 5px 5px 0px var(--black);
+      --shadow-lg: 8px 8px 0px var(--black);
+      --shadow-sm: 3px 3px 0px var(--black);
+      --border: 2px solid var(--black);
+      --border-thick: 3px solid var(--black);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white);
+      border-bottom: var(--border-thick);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 0.06em;
+      color: var(--black); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--black); text-decoration: none;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .nav-links a:hover { border-bottom-color: var(--black); }
+    .nav-cta {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--white); background: var(--black);
+      padding: 0.5rem 1.25rem;
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .nav-cta:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--black); }
+    .nav-cta:active { transform: translate(0,0); box-shadow: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--black); color: var(--white);
+      padding: 4rem 2.5rem 3.5rem;
+      border-bottom: var(--border-thick);
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: 1.5rem;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); color: var(--black);
+      padding: 0.3rem 0.9rem;
+      border: 2px solid var(--white);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-tag::before {
+      content: ''; width: 8px; height: 8px;
+      background: #22c55e; border-radius: 50%;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 16vw, 11rem);
+      letter-spacing: 0.02em; line-height: 0.88;
+    }
+    .hero-desc {
+      font-size: 1rem; color: #aaa; max-width: 480px;
+      font-weight: 400; line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.75rem 1.75rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; border: 2px solid var(--white);
+      transition: transform 0.12s, box-shadow 0.12s;
+      cursor: pointer;
+    }
+    .btn-solid { background: var(--white); color: var(--black); box-shadow: 4px 4px 0 rgba(255,255,255,0.3); }
+    .btn-solid:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(255,255,255,0.3); }
+    .btn-outline { background: transparent; color: var(--white); box-shadow: 4px 4px 0 rgba(255,255,255,0.15); }
+    .btn-outline:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 rgba(255,255,255,0.15); }
+
+    /* ── TICKER ── */
+    .ticker {
+      background: var(--off); border-bottom: var(--border-thick);
+      padding: 0.65rem 0; overflow: hidden; white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-block;
+      animation: scroll 28s linear infinite;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    @keyframes scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .t-sep { margin: 0 1.25rem; color: var(--muted); }
+
+    /* ── SECTION WRAPPER ── */
+    .section { padding: 4rem 2.5rem; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      border: 2px solid var(--muted);
+      padding: 0.2rem 0.7rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: 0.04em; line-height: 1;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── LAYANAN ── */
+    .layanan-wrap { background: var(--off); border-top: var(--border-thick); border-bottom: var(--border-thick); }
+    .layanan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .serv-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: default;
+    }
+    .serv-card:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .serv-card:active { transform: translate(0,0); box-shadow: none; }
+    .serv-num {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .serv-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; line-height: 1; }
+    .serv-card h3 {
+      font-size: 1rem; font-weight: 700;
+      margin-bottom: 0.35rem; letter-spacing: -0.01em;
+    }
+    .serv-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+    .serv-cta {
+      background: var(--black); color: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      padding: 1.75rem 1.5rem;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .serv-cta:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .serv-cta .serv-num { color: #555; }
+    .serv-cta h3 { color: var(--white); font-size: 1rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .serv-cta p { color: #888; font-size: 0.82rem; line-height: 1.55; }
+
+    /* ── HARGA ── */
+    .harga-wrap { background: var(--white); border-bottom: var(--border-thick); }
+    .harga-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.5rem;
+    }
+    .price-card {
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .price-card:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .price-card-head {
+      background: var(--black); color: var(--white);
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .price-card-head span { font-size: 1.3rem; }
+    .price-card-head h3 { font-size: 0.88rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+    .price-card-body { background: var(--white); padding: 0.75rem 1.5rem 1.25rem; }
+    .p-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1.5px solid var(--mid);
+      font-size: 0.85rem;
+    }
+    .p-row:last-child { border-bottom: none; }
+    .p-row .item { color: var(--muted); }
+    .p-row .price { font-weight: 700; font-size: 0.88rem; }
+
+    /* ── KONTAK ── */
+    .kontak-wrap { background: var(--off); border-bottom: var(--border-thick); }
+    .kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .info-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+    .info-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .i-row { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 1.1rem; }
+    .i-icon {
+      font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
+    }
+    .i-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2px;
+    }
+    .i-val { font-size: 0.92rem; font-weight: 500; }
+    .jam-block {
+      margin-top: 1.25rem;
+      background: var(--black); color: var(--white);
+      padding: 1.25rem 1.5rem;
+      border: var(--border-thick);
+      box-shadow: var(--shadow-sm);
+    }
+    .jam-block .j-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #888; margin-bottom: 4px;
+    }
+    .jam-block .j-time {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem; letter-spacing: 0.04em; line-height: 1;
+    }
+    .jam-block .j-sub { font-size: 0.78rem; color: #888; margin-top: 4px; }
+    .wa-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-top: 1.25rem;
+      background: var(--black); color: var(--white);
+      padding: 0.9rem 1.5rem;
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none;
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .wa-btn:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .wa-btn:active { transform: translate(0,0); box-shadow: none; }
+    .map-card {
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .map-inner {
+      background: var(--off); padding: 2.5rem 2rem;
+      text-align: center; border-bottom: var(--border);
+    }
+    .map-inner .pin { font-size: 3rem; margin-bottom: 0.75rem; display: block; }
+    .map-inner strong {
+      display: block; font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem; letter-spacing: 0.06em; margin-bottom: 0.3rem;
+    }
+    .map-inner span { font-size: 0.82rem; color: var(--muted); }
+    .map-footer {
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .map-footer a {
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.04em; color: var(--black);
+      text-decoration: none; border-bottom: 2px solid var(--black);
+      padding-bottom: 1px; transition: opacity 0.15s;
+    }
+    .map-footer a:hover { opacity: 0.5; }
+    .tip-strip {
+      margin: 1.5rem 0 0;
+      background: var(--white);
+      border: var(--border-thick);
+      box-shadow: var(--shadow-sm);
+      padding: 1rem 1.25rem;
+      font-size: 0.82rem; font-weight: 500;
+      line-height: 1.65; color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black); color: var(--white);
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .f-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; }
+    .f-meta { font-size: 0.75rem; color: #888; text-align: right; line-height: 1.8; }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 999;
+      background: var(--black); color: var(--white);
+      width: 54px; height: 54px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .wa-float:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-lg); }
+    .wa-float:active { transform: translate(0,0); box-shadow: none; }
+
+    /* ── KALKULATOR ── */
+    .kalk-wrap { background: var(--black); border-bottom: var(--border-thick); }
+    .kalk-wrap .section-eyebrow { color: #888; border-color: #888; }
+    .kalk-wrap .section-title { color: var(--white); }
+    .kalk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .kalk-panel {
+      background: #1a1a18;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+    }
+    .kalk-panel h3 {
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #888; margin-bottom: 1.5rem;
+    }
+    .kalk-field { margin-bottom: 1.25rem; }
+    .kalk-field label {
+      display: block; font-size: 0.8rem; font-weight: 600;
+      color: #aaa; margin-bottom: 0.5rem; letter-spacing: 0.04em;
+    }
+    .kalk-field select, .kalk-field input {
+      width: 100%;
+      background: #111110; color: var(--white);
+      border: 2px solid #333;
+      padding: 0.65rem 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.9rem; font-weight: 500;
+      outline: none;
+      appearance: none;
+      transition: border-color 0.15s;
+    }
+    .kalk-field select:focus, .kalk-field input:focus { border-color: var(--white); }
+    .kalk-field select { cursor: pointer; }
+    .kalk-result {
+      background: var(--white); color: var(--black);
+      border: var(--border-thick);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .kalk-result .res-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .kalk-result .res-total {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.02em; line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .kalk-result .res-detail {
+      font-size: 0.82rem; color: var(--muted);
+      margin-bottom: 1.5rem; line-height: 1.6;
+    }
+    .kalk-wa {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--black); color: var(--white);
+      padding: 0.8rem 1.25rem;
+      font-size: 0.82rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; border: var(--border-thick);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.12s, box-shadow 0.12s;
+      cursor: pointer;
+    }
+    .kalk-wa:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow); }
+    .kalk-wa:active { transform: translate(0,0); box-shadow: none; }
+    .kalk-note {
+      font-size: 0.75rem; color: #666;
+      margin-top: 1.25rem; text-align: center;
+    }
+    @media (max-width: 700px) {
+      .kalk-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 860px) {
+      .kontak-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .section { padding: 3rem 1.25rem; }
+      nav { padding: 0 1.25rem; }
+      footer { padding: 1.75rem 1.25rem; flex-direction: column; align-items: flex-start; }
+      .f-meta { text-align: left; }
+    }
+
+    /* ── FADE IN ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.png" alt="Alfian Print" style="height:34px; width:auto; filter:invert(1); display:block;"/></a>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#harga">Harga</a></li>
+    <li><a href="#kalkulator">Kalkulator</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+  </ul>
+  <a href="https://wa.me/6285931999091?text=Halo%20Alfian%20Print" class="nav-cta" target="_blank">Chat WA →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Buka Setiap Hari</div>
+  <img src="logo.png" alt="Alfian Print" style="height:clamp(100px,18vw,180px); width:auto; filter:invert(1); margin-bottom:0.5rem;"/>
+  <p class="hero-desc">Pusat fotokopi, print, cetak foto, jilid, laminating, desain grafis, dan alat tulis di Bahoea Reko Reko, Bungku Barat.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/6285931999091?text=Halo%20Alfian%20Print,%20saya%20mau%20pesan" class="btn btn-solid" target="_blank">Pesan via WhatsApp</a>
+    <a href="#layanan" class="btn btn-outline">Lihat Layanan</a>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>Fotokopi</span><span class="t-sep">✦</span>
+    <span>Print Warna</span><span class="t-sep">✦</span>
+    <span>Cetak Foto</span><span class="t-sep">✦</span>
+    <span>Jilid</span><span class="t-sep">✦</span>
+    <span>Laminating</span><span class="t-sep">✦</span>
+    <span>Desain Grafis</span><span class="t-sep">✦</span>
+    <span>Alat Tulis & ATK</span><span class="t-sep">✦</span>
+    <span>Buka 07.00 – 22.00 WITA</span><span class="t-sep">✦</span>
+    <span>Fotokopi</span><span class="t-sep">✦</span>
+    <span>Print Warna</span><span class="t-sep">✦</span>
+    <span>Cetak Foto</span><span class="t-sep">✦</span>
+    <span>Jilid</span><span class="t-sep">✦</span>
+    <span>Laminating</span><span class="t-sep">✦</span>
+    <span>Desain Grafis</span><span class="t-sep">✦</span>
+    <span>Alat Tulis & ATK</span><span class="t-sep">✦</span>
+    <span>Buka 07.00 – 22.00 WITA</span><span class="t-sep">✦</span>
+  </div>
+</div>
+
+<!-- LAYANAN -->
+<div class="layanan-wrap" id="layanan">
+  <div class="section">
+    <div class="section-inner">
+      <span class="section-eyebrow reveal">Layanan</span>
+      <h2 class="section-title reveal">Semua kebutuhan<br>cetak dalam satu tempat</h2>
+      <div class="layanan-grid">
+        <div class="serv-card reveal" style="transition-delay:.04s">
+          <div class="serv-num">— 01</div>
+          <span class="serv-icon">📄</span>
+          <h3>Fotokopi</h3>
+          <p>Hitam putih dan warna, ukuran A4, F4, hingga A3. Cepat dan hasil tajam.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.08s">
+          <div class="serv-num">— 02</div>
+          <span class="serv-icon">🖨️</span>
+          <h3>Print Dokumen</h3>
+          <p>Print warna & hitam putih kualitas tinggi untuk tugas, skripsi, dan laporan.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.12s">
+          <div class="serv-num">— 03</div>
+          <span class="serv-icon">📸</span>
+          <h3>Cetak Foto</h3>
+          <p>Cetak foto ukuran 2×3, 4×6, 4R, hingga A4 dengan warna akurat dan tajam.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.16s">
+          <div class="serv-num">— 04</div>
+          <span class="serv-icon">📚</span>
+          <h3>Jilid</h3>
+          <p>Jilid spiral, soft cover, dan hard cover untuk laporan dan skripsi.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.2s">
+          <div class="serv-num">— 05</div>
+          <span class="serv-icon">✨</span>
+          <h3>Laminating</h3>
+          <p>Laminasi glossy dan doff untuk semua ukuran dokumen dan foto.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.24s">
+          <div class="serv-num">— 06</div>
+          <span class="serv-icon">🎨</span>
+          <h3>Desain Grafis</h3>
+          <p>Logo, banner, undangan, kartu nama, pamflet, dan kebutuhan desain lainnya.</p>
+        </div>
+        <div class="serv-card reveal" style="transition-delay:.28s">
+          <div class="serv-num">— 07</div>
+          <span class="serv-icon">✏️</span>
+          <h3>Alat Tulis & ATK</h3>
+          <p>Jual perlengkapan sekolah dan kantor — pulpen, kertas, map, dan lainnya.</p>
+        </div>
+        <div class="serv-cta reveal" style="transition-delay:.32s" onclick="window.open('https://wa.me/6285931999091?text=Halo%20Alfian%20Print','_blank')">
+          <div class="serv-num">Ada pertanyaan?</div>
+          <span class="serv-icon">💬</span>
+          <h3>Tanya Admin</h3>
+          <p>Hubungi kami via WhatsApp untuk info lebih lanjut →</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HARGA -->
+<div class="harga-wrap" id="harga">
+  <div class="section">
+    <div class="section-inner">
+      <span class="section-eyebrow reveal">Daftar Harga</span>
+      <h2 class="section-title reveal">Harga terjangkau,<br>kualitas terjamin</h2>
+      <div class="harga-grid">
+        <div class="price-card reveal" style="transition-delay:.04s">
+          <div class="price-card-head"><span>🖨️</span><h3>Print Dokumen</h3></div>
+          <div class="price-card-body">
+            <div class="p-row"><span class="item">Fotokopi Hitam Putih</span><span class="price">Rp 500/lbr</span></div>
+            <div class="p-row"><span class="item">Print Hitam Putih A4</span><span class="price">Rp 1.000/lbr</span></div>
+            <div class="p-row"><span class="item">Warna Gambar Sedang A4</span><span class="price">Rp 2.000 – 3.000</span></div>
+            <div class="p-row"><span class="item">Warna Gambar Full A4</span><span class="price">Rp 4.000 – 5.000</span></div>
+          </div>
+        </div>
+        <div class="price-card reveal" style="transition-delay:.08s">
+          <div class="price-card-head"><span>📸</span><h3>Foto Ukuran Kecil</h3></div>
+          <div class="price-card-body">
+            <div class="p-row"><span class="item">Foto 3×4</span><span class="price">Rp 3.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 3×4 (paket hemat)</span><span class="price">Rp 10.000/4 lbr</span></div>
+            <div class="p-row"><span class="item">Foto 4×6</span><span class="price">Rp 4.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 4×6 (paket hemat)</span><span class="price">Rp 10.000/3 lbr</span></div>
+            <div class="p-row"><span class="item">Foto 2R</span><span class="price">Rp 5.000/lbr</span></div>
+            
+          </div>
+        </div>
+        <div class="price-card reveal" style="transition-delay:.12s">
+          <div class="price-card-head"><span>🖼️</span><h3>Foto Ukuran Besar</h3></div>
+          <div class="price-card-body">
+            <div class="p-row"><span class="item">Foto 3R</span><span class="price">Rp 6.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 4R</span><span class="price">Rp 7.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 5R</span><span class="price">Rp 8.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 6R</span><span class="price">Rp 10.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 8R</span><span class="price">Rp 15.000/lbr</span></div>
+            <div class="p-row"><span class="item">Foto 10R</span><span class="price">Rp 20.000/lbr</span></div>
+          </div>
+        </div>
+        <div class="price-card reveal" style="transition-delay:.16s">
+          <div class="price-card-head"><span>📚</span><h3>Jilid & Lainnya</h3></div>
+          <div class="price-card-body">
+            <div class="p-row"><span class="item">Jilid Lakban</span><span class="price">Rp 5.000</span></div>
+            <div class="p-row"><span class="item">Jilid Spiral</span><span class="price">Rp 10.000</span></div>
+            <div class="p-row"><span class="item">Jilid Soft Cover</span><span class="price">Rp 15.000</span></div>
+            <div class="p-row"><span class="item">Laminating A4/F4</span><span class="price">Rp 5.000</span></div>
+            <div class="p-row"><span class="item">Desain Grafis</span><span class="price">Tanya Admin</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.78rem; color:var(--muted); margin-top:1.25rem;">* Harga dapat berubah sewaktu-waktu. Konfirmasi harga terkini via WhatsApp sebelum memesan.</p>
+    </div>
+  </div>
+</div>
+
+<!-- KALKULATOR -->
+<div class="kalk-wrap" id="kalkulator">
+  <div class="section">
+    <div class="section-inner">
+      <span class="section-eyebrow reveal">Kalkulator Harga</span>
+      <h2 class="section-title reveal">Hitung estimasi<br>biaya cetakmu</h2>
+      <div class="kalk-grid">
+        <div class="kalk-panel reveal">
+          <h3>Pilih Layanan</h3>
+          <div class="kalk-field">
+            <label>Jenis Layanan</label>
+            <select id="kalk-jenis" onchange="hitungHarga()">
+              <option value="">-- Pilih layanan --</option>
+              <optgroup label="Print Dokumen">
+                <option value="500">Fotokopi Hitam Putih — Rp 500/lbr</option>
+                <option value="1000">Print Hitam Putih A4 — Rp 1.000/lbr</option>
+                <option value="2000">Print Warna Sedang A4 — Rp 2.000/lbr</option>
+                <option value="4000">Print Warna Full A4 — Rp 4.000/lbr</option>
+              </optgroup>
+              <optgroup label="Cetak Foto Kecil">
+                <option value="3000">Foto 3×4 — Rp 3.000/lbr</option>
+                <option value="4000">Foto 4×6 — Rp 4.000/lbr</option>
+                <option value="5000">Foto 2R — Rp 5.000/lbr</option>
+                <option value="6000">Foto 3R — Rp 6.000/lbr</option>
+                <option value="7000">Foto 4R — Rp 7.000/lbr</option>
+              </optgroup>
+              <optgroup label="Cetak Foto Besar">
+                <option value="8000">Foto 5R — Rp 8.000/lbr</option>
+                <option value="10000">Foto 6R — Rp 10.000/lbr</option>
+                <option value="15000">Foto 8R — Rp 15.000/lbr</option>
+                <option value="20000">Foto 10R — Rp 20.000/lbr</option>
+              </optgroup>
+              <optgroup label="Jilid & Finishing">
+                <option value="5000">Jilid Lakban — Rp 5.000</option>
+                <option value="10000">Jilid Spiral — Rp 10.000</option>
+                <option value="15000">Jilid Soft Cover — Rp 15.000</option>
+                <option value="5000">Laminating A4 — Rp 5.000</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="kalk-field">
+            <label>Jumlah (lembar / eksemplar)</label>
+            <input type="number" id="kalk-jumlah" min="1" value="1" oninput="hitungHarga()" placeholder="Masukkan jumlah..." />
+          </div>
+          <div class="kalk-field">
+            <label>Tambahan Jilid?</label>
+            <select id="kalk-jilid" onchange="hitungHarga()">
+              <option value="0">Tidak perlu</option>
+              <option value="5000">+ Jilid Lakban (Rp 5.000)</option>
+              <option value="10000">+ Jilid Spiral (Rp 10.000)</option>
+              <option value="15000">+ Jilid Soft Cover (Rp 15.000)</option>
+            </select>
+          </div>
+          <div class="kalk-field">
+            <label>Tambahan Laminating?</label>
+            <select id="kalk-laminasi" onchange="hitungHarga()">
+              <option value="0">Tidak perlu</option>
+              <option value="5000">+ Laminating A4 (Rp 5.000/lbr)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="kalk-result reveal" style="transition-delay:.1s">
+          <div class="res-label">Estimasi Total</div>
+          <div class="res-total" id="kalk-total">Rp 0</div>
+          <div class="res-detail" id="kalk-detail">Pilih layanan dan masukkan jumlah untuk melihat estimasi harga.</div>
+          <a class="kalk-wa" id="kalk-wa-btn" href="https://wa.me/6285931999091?text=Halo%20Alfian%20Print,%20saya%20mau%20pesan" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pesan via WhatsApp
+          </a>
+          <p class="kalk-note">* Estimasi kasar. Harga final dikonfirmasi saat pemesanan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KONTAK -->
+<div class="kontak-wrap" id="kontak">
+  <div class="section">
+    <div class="section-inner">
+      <span class="section-eyebrow reveal">Kontak & Lokasi</span>
+      <h2 class="section-title reveal">Temukan kami di sini</h2>
+      <div class="kontak-grid">
+        <div class="info-card reveal">
+          <h3>Info Toko</h3>
+          <div class="i-row">
+            <span class="i-icon">📍</span>
+            <div>
+              <div class="i-label">Alamat</div>
+              <div class="i-val">Bahoea Reko Reko, Bungku Barat, Kab. Morowali, Sulawesi Tengah</div>
+            </div>
+          </div>
+          <div class="i-row">
+            <span class="i-icon">📱</span>
+            <div>
+              <div class="i-label">WhatsApp</div>
+              <div class="i-val">0859-3199-9091</div>
+            </div>
+          </div>
+          <div class="jam-block">
+            <div class="j-label">Jam Buka — Setiap Hari</div>
+            <div class="j-time">07.00 — 22.00</div>
+            <div class="j-sub">Senin s/d Minggu · WITA</div>
+          </div>
+          <a href="https://wa.me/6285931999091?text=Halo%20Alfian%20Print,%20saya%20ingin%20bertanya" class="wa-btn" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Hubungi via WhatsApp
+          </a>
+        </div>
+        <div class="reveal" style="transition-delay:.1s">
+          <div class="map-card">
+            <div class="map-inner">
+              <span class="pin">📍</span>
+              <strong>ALFIAN PRINT</strong>
+              <span>Bahoea Reko Reko, Bungku Barat, Kab. Morowali</span>
+            </div>
+            <div class="map-footer">
+              <a href="https://www.google.com/maps/place/Fotocopy+dan+Print/@-2.4110087,121.8806221,16.5z/data=!4m6!3m5!1s0x2d9a97a296d45061:0xc75a166da0def7b9!8m2!3d-2.4098317!4d121.8798272!16s%2Fg%2F11xcjtpzbg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank">Buka di Google Maps →</a>
+              <span style="font-size:0.75rem; color:var(--muted);">Parkir tersedia</span>
+            </div>
+          </div>
+          <div class="tip-strip">
+            💡 Untuk pesanan jumlah banyak, skripsi, atau kebutuhan desain khusus — hubungi kami terlebih dahulu via WhatsApp agar bisa diproses lebih cepat.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo"><img src="logo.png" alt="Alfian Print" style="height:36px; width:auto; filter:invert(1); display:block;"/></div>
+  <div class="f-meta">
+    Bahoea Reko Reko, Bungku Barat, Kab. Morowali<br>
+    Buka Setiap Hari · 07.00–22.00 WITA<br>
+    WA: 0859-3199-9091
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/6285931999091?text=Halo%20Alfian%20Print" class="wa-float" target="_blank" title="Chat WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  function hitungHarga() {
+    const jenis = document.getElementById('kalk-jenis');
+    const jumlah = parseInt(document.getElementById('kalk-jumlah').value) || 0;
+    const jilidVal = parseInt(document.getElementById('kalk-jilid').value) || 0;
+    const laminasiVal = parseInt(document.getElementById('kalk-laminasi').value) || 0;
+    const hargaSatuan = parseInt(jenis.value) || 0;
+    const namaLayanan = jenis.options[jenis.selectedIndex]?.text || '';
+
+    if (!hargaSatuan || jumlah < 1) {
+      document.getElementById('kalk-total').textContent = 'Rp 0';
+      document.getElementById('kalk-detail').textContent = 'Pilih layanan dan masukkan jumlah untuk melihat estimasi harga.';
+      return;
+    }
+
+    const subtotal = hargaSatuan * jumlah;
+    const laminasiTotal = laminasiVal * jumlah;
+    const total = subtotal + jilidVal + laminasiTotal;
+
+    document.getElementById('kalk-total').textContent = 'Rp ' + total.toLocaleString('id-ID');
+
+    let detail = `${jumlah} × Rp ${hargaSatuan.toLocaleString('id-ID')} = Rp ${subtotal.toLocaleString('id-ID')}`;
+    if (jilidVal) detail += `\n+ Jilid: Rp ${jilidVal.toLocaleString('id-ID')}`;
+    if (laminasiTotal) detail += `\n+ Laminating (${jumlah} lbr): Rp ${laminasiTotal.toLocaleString('id-ID')}`;
+    document.getElementById('kalk-detail').style.whiteSpace = 'pre-line';
+    document.getElementById('kalk-detail').textContent = detail;
+
+    const pesan = `Halo Alfian Print, saya mau pesan:%0A- ${namaLayanan.split('—')[0].trim()}%0A- Jumlah: ${jumlah} lembar%0A- Estimasi total: Rp ${total.toLocaleString('id-ID')}%0ATolong dikonfirmasi harganya. Terima kasih!`;
+    document.getElementById('kalk-wa-btn').href = `https://wa.me/6285931999091?text=${pesan}`;
+  }
+</script>
+</body>
+</html>
